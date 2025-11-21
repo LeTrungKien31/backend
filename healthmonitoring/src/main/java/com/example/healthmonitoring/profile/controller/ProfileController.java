@@ -69,3 +69,47 @@ public class ProfileController {
     @GetMapping("/insights")
     public ProfileService.HealthInsights getInsights(Authentication auth) {
         return profileService.getHealthInsights(getUserId(auth));
+    }
+
+    // DTO Classes
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ProfileRequest {
+        @NotBlank(message = "Gender is required")
+        private String gender; // MALE, FEMALE, OTHER
+
+        @NotNull(message = "Date of birth is required")
+        private LocalDate dateOfBirth;
+
+        @Positive(message = "Height must be positive")
+        @DecimalMin(value = "50", message = "Height must be at least 50cm")
+        @DecimalMax(value = "300", message = "Height must not exceed 300cm")
+        private double heightCm;
+
+        @Positive(message = "Weight must be positive")
+        @DecimalMin(value = "20", message = "Weight must be at least 20kg")
+        @DecimalMax(value = "500", message = "Weight must not exceed 500kg")
+        private double currentWeightKg;
+
+        private Double targetWeightKg;
+
+        @NotBlank(message = "Activity level is required")
+        private String activityLevel; // SEDENTARY, LIGHTLY_ACTIVE, etc.
+
+        @NotBlank(message = "Goal is required")
+        private String goal; // LOSE_WEIGHT, MAINTAIN, GAIN_WEIGHT
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class UpdateWeightRequest {
+        @Positive(message = "Weight must be positive")
+        @DecimalMin(value = "20", message = "Weight must be at least 20kg")
+        @DecimalMax(value = "500", message = "Weight must not exceed 500kg")
+        private double weightKg;
+    }
+}

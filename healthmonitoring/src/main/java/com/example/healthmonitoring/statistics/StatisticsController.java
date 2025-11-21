@@ -3,7 +3,6 @@ package com.example.healthmonitoring.statistics;
 import com.example.healthmonitoring.activity.repo.ActivityLogRepository;
 import com.example.healthmonitoring.meal.repo.MealLogRepository;
 import com.example.healthmonitoring.water.repo.WaterLogRepository;
-import com.example.healthmonitoring.profile.repo.UserProfileRepository;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
@@ -13,7 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/api/v1/statistics")
@@ -23,7 +22,7 @@ public class StatisticsController {
     private final WaterLogRepository waterRepo;
     private final MealLogRepository mealRepo;
     private final ActivityLogRepository activityRepo;
-    private final UserProfileRepository profileRepo;
+
 
     private String getUserId(Authentication auth) {
         return auth.getName();
